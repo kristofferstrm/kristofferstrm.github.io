@@ -1,0 +1,48 @@
+<DOCTYPE! html>
+<html>
+<head>
+</head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script>
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAOO2lbYE3w3MnuRPXlBqe44q3mwXGaYdg",
+    authDomain: "navenliste.firebaseapp.com",
+    databaseURL: "https://navenliste.firebaseio.com",
+    projectId: "navenliste",
+    storageBucket: "navenliste.appspot.com",
+    messagingSenderId: "206411867509",
+    appId: "1:206411867509:web:6b8f14b635d554ebfb9f3c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+      let db = firebase.database();
+      // Referer til tabellen du vil jobbe med
+      let besoksbok = db.ref("besoksbok");
+
+      function submit_data(){
+        var navn_in = document.getElementById("navn").value;
+        var beskjed_in = document.getElementById("beskjed").value;
+
+          let new_object = besoksbok.child(navn_in);
+
+          new_object.set(
+          {
+            navn : navn_in , beskjed : beskjed_in
+          }
+          );
+
+          window.alert("Beskjed lagt til i database");
+        }
+    </script>
+    <!-- HTML KODE -->
+    <input id="navn" type="text" placeholder="Navn" required autocomplete="off"><br>
+    <textarea id ="beskjed" rows="4" cols="50" placeholder="Beskjed skrives her" required></textarea><br>
+    <input submit type="submit" onclick= "submit_data()"value="Send inn!">
+    <!-- HTML KODE SLUTT -->
+  </body>
+</html>
