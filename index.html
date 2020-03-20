@@ -3,45 +3,53 @@
 <head>
 </head>
   <body>
-    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
     <script>
 
   // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyAOO2lbYE3w3MnuRPXlBqe44q3mwXGaYdg",
-    authDomain: "navenliste.firebaseapp.com",
-    databaseURL: "https://navenliste.firebaseio.com",
-    projectId: "navenliste",
-    storageBucket: "navenliste.appspot.com",
-    messagingSenderId: "206411867509",
-    appId: "1:206411867509:web:6b8f14b635d554ebfb9f3c"
-  };
+    var firebaseConfig = {
+    apiKey: "AIzaSyAsgnjdnx1rAu9HdKZhp4yc2IZMod6t5sI",
+    authDomain: "bibliotek-578f0.firebaseapp.com",
+    databaseURL: "https://bibliotek-578f0.firebaseio.com",
+    projectId: "bibliotek-578f0",
+    storageBucket: "bibliotek-578f0.appspot.com",
+    messagingSenderId: "1098565713208",
+    appId: "1:1098565713208:web:1fb72f3b26fc9ee3aa15cd"
+    };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
       let db = firebase.database();
       // Referer til tabellen du vil jobbe med
-      let besoksbok = db.ref("besoksbok");
+      let bibliotek = db.ref("bibliotek");
 
       function submit_data(){
-        var navn_in = document.getElementById("navn").value;
-        var beskjed_in = document.getElementById("beskjed").value;
+        var tittel_in = document.getElementById("tittel").value;
+        var forfatter_in = document.getElementById("forfatter").value;
+        var isbn_in = document.getElementById("isbn").value;
+        var dato_in = document.getElementById("dato").value;
 
-          let new_object = besoksbok.child(navn_in);
+          let new_object = bibliotek.child(tittel_in);
 
           new_object.set(
-          {
-            navn : navn_in , beskjed : beskjed_in
-          }
+              {
+                tittel : tittel_in , forfatter : forfatter_in , ISBN : isbn_in , dato : dato_in
+              }
           );
 
           window.alert("Beskjed lagt til i database");
         }
     </script>
     <!-- HTML KODE -->
-    <input id="navn" type="text" placeholder="Navn" required autocomplete="off"><br>
-    <textarea id ="beskjed" rows="4" cols="50" placeholder="Beskjed skrives her" required></textarea><br>
+    <input id="tittel" type="text" placeholder="Tittel" required autocomplete="off">
+    <br>
+    <input id ="forfatter" type="text" placeholder="Forfatter" required>
+    <br>
+    <input id ="isbn" type="text" placeholder="ISBN" required>
+    <br>
+    <input id="dato" type="date" placeholder="Utgivelses dato" required> 
+    
     <input submit type="submit" onclick= "submit_data()"value="Send inn!">
     <!-- HTML KODE SLUTT -->
   </body>
